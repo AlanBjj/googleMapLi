@@ -5,7 +5,7 @@ automatically recognizing a building's edge by its address Name.
 Nominatim是一种按名称和地址（地理编码）搜索 OpenStreetMap 数据并生成OSM点以及反向地理编码的工具。它用作OpenStreetMap主页上搜索框的检索任务。本项目是基于Nominatim的docker项目来实现，输入地址名称，返回建筑边缘经纬度。
 
 ## 部署Nominatim的docker项目
-Nominatim的项目可以参见链接：[Nominatim的docker项目](https://github.com/mediagis/nominatim-docker/tree/master/4.4)。具体过程如下所示。
+[Nominatim的docker项目](https://github.com/mediagis/nominatim-docker/tree/master/4.4)。具体的部署过程可以见下文所示。
 
 ### 下载包含所需地址的数据
 在[下载地址](https://download.geofabrik.de/)，对所需要地址的地图pbf数据进行下载。保存于地址C:/Users/USTC/Desktop/Nominatim/data
