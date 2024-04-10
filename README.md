@@ -14,9 +14,9 @@ Nominatim的项目可以参见链接：[Nominatim的docker项目](https://github
 ```
 docker run -e PBF_PATH=/nominatim/data/taiwan-latest.osm.pbf -p 8080:8080 -v C:/Users/USTC/Desktop/Nominatim/data:/nominatim/data --name nominatim mediagis/nominatim:4.4
 ```
-其中，-e参数后接在镜像目录中地图数据所在的地址。-p参数为端口映射。-v参数表示目录的映射，格式为本机地图数据目录:镜像地图数据目录。--name参数可自动下载nominatim:4.4项目镜像。这里只需更改本机地图数据目录即可。
+其中，-e参数后接在镜像目录中地图数据所在的地址。-p参数为端口映射。-v参数表示目录的映射，格式为本机地图数据目录:镜像地图数据目录。--name参数可自动下载nominatim:4.4项目镜像。
 
-创建服务器的时间相当长，原因是：加载导入的地图数据，加载过程会比较耗时。
+该指令只需更改本机地图数据目录即可。同时，创建服务器的时间相当长，原因是：加载导入的地图数据，加载过程会比较耗时。
 ### 本地使用样例
 搭建好了之后，在本机可以运行服务器，可在浏览器访问。更多使用方法的API请见[API](https://nominatim.org/release-docs/develop/api/Overview/)。
 
