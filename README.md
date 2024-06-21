@@ -5,18 +5,19 @@ automatically recognizing a building's edge by its address Name.
 Nominatim是一种按名称和地址（地理编码）搜索 OpenStreetMap 数据并生成OSM点以及反向地理编码的工具。它用作OpenStreetMap主页上搜索框的检索任务。本项目是基于Nominatim的docker项目来实现，输入地址名称，返回建筑边缘经纬度。
 
 ## 部署Nominatim的docker项目
-本项目的该方案实现基于[Nominatim的docker项目](https://github.com/mediagis/nominatim-docker/tree/master/4.4)。在本项目下具体的部署过程可以见下文所示。
+本项目的该方案实现基于[Nominatim的docker项目](https://github.com/mediagis/nominatim-docker/tree/master/4.4)。本项目的部署过程可以见下文的详细介绍。
 
 ### 下载包含所需地址的数据
-在[下载地址](https://download.geofabrik.de/)，对所需要地址的地图pbf数据进行下载。笔者保存于地址C:/Users/USTC/Desktop/Nominatim/data
+[开源地图pbf下载地址](https://download.geofabrik.de/)，下载所需要地址的地图pbf数据。笔者下载保存于本地地址C:/Users/USTC/Desktop/Nominatim/data
 
 ### docker部署指令
+采用docker指令可以部署好项目所需环境，指令以及指令介绍如下所示。
 ```
 docker run -e PBF_PATH=/nominatim/data/taiwan-latest.osm.pbf -p 8080:8080 -v C:/Users/USTC/Desktop/Nominatim/data:/nominatim/data --name nominatim mediagis/nominatim:4.4
 ```
-其中，-e参数后接在镜像目录中地图数据所在的地址。-p参数为端口映射。-v参数表示目录的映射，-v参数的格式为"本机地图数据目录:镜像地图数据目录"。--name参数可自动下载nominatim:4.4项目镜像。
+其中，-e参数后接在镜像目录中地图数据所在的地址。-p参数为端口映射。-v参数表示目录的映射，-v参数的格式为"本机地图数据目录:镜像地图数据目录"。--name参数加上可自动下载nominatim:4.4项目镜像。
 
-该指令只需更改本机地图数据目录即可。同时，创建服务器的时间相当长（可能数小时）这个的原因是：加载导入的地图数据，数据库构建和加载过程会比较耗时。
+该指令只需-v参数更改为自己本机的地图数据路径即可。同时，创建服务器的时间非常长（约数个小时）这个的原因是：加载导入的地图数据，数据库构建和加载过程会比较耗时。
 
 ### 本地使用样例
 搭建好了之后，在本机可以运行服务器，可在浏览器访问。更多使用方法的API请见[API](https://nominatim.org/release-docs/develop/api/Overview/)。
@@ -235,7 +236,7 @@ python Inference.py --model_path ./weights/FastSAM.pt --img_path ./images/pictur
 --model_path表示SAM的预训练权重，可以在SAM项目中下载。--img_path表示图片所在路径。--point_prompt表示该点在地图中所处的位置。--point_label中1表示需要分割，0表示不需要分割。
 
 ![建筑物分割效果](figs/fig1.png)
-如图，模型可输出将建筑物分割后的图片已实现。怎么让模型输出建筑物轮廓的像素点坐标还需要查看代码，也是亟须完成的工作。
+如图，模型可输出将建筑物分割后的图片已实现。怎么让模型输出建筑物轮廓的像素点坐标还需要查看代码（也是亟须完成的工作）。
 
 ### 像素点与经纬度之间的映射
 本项目中一个需要关注的地方，获取的地图图像上的图片像素点坐标，应该和地球的经纬度实现一一映射对应。即：建筑物中心的经纬度要转换为图片中的像素点的坐标、分割后建筑物轮廓的图片中像素点坐标要转换为地理经纬度。
